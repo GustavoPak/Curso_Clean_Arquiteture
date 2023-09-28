@@ -1,0 +1,9 @@
+Arquitetura monolitica
+
+ Consistem um criar uma aplicação baseando-se apenas em uma camada ou assembly,onde a separação das responsabilidades e feito meramente por pastas,tornando assim a logica
+de negocios muito acoplada a toda a aplicação,essa arquitetura não é uma ma arquitetura ou defasada,porem como pode ver ela é apenas util para projetos simples
+que não crescem conforme o tempo e que não se utilizam de logicas extremamente complexa,caso seja um projeto grande é essencial separar as responsabilidades em camadas
+para assim melhor manutenção,desacoplamento organização de dados,claro tendo um certo custo de mão de obra.
+ A arquitetura monolitica pode ser exemplificada como um projeto padrão MVC,perceba que essas tres areas ficam altamente acopladas e ligadas e qualquer mer alteração pode 
+quebrar toda a aplicação. Diferente da arquitetura em camadas que tenta deixar uma camada quase independente da outra camada,assim permitindo alterações mais
+facilmente.

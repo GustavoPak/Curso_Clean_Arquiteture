@@ -1,0 +1,15 @@
+Arquitetura em camadas?
+
+Consiste em um projeto separado por camadas,porem existem tipos de arquiteturas em camadas menos acopladas que o monolitico,que separa as camadas em projetos
+e separando as dependencias concretamente,diminuindo o acoplamento dentre as camadas,essas camadas são projetos que fazem uma conexão entrei si porem que o tornam independentes
+ou pouco acoplados,o que facilita em muito ampliações futuras em nosso projetos.
+
+Temos como exemplo a mais usada,arquitetura em tres camadas que são tres projeos que representam camadas dentro da sua solução onde podemos nomear como
+
+(UI) User Interface/Presentation Layer(Camada de apresentação)
+
+(BLL) Business logic layer - camada da logica de negocios
+
+(DAL) Data acess layer - camada de acesso a dados
+
+Seria mais objetivamente projetos separados em camadas e cada projeto posssui nenhuma ou pouca ligação com outro projeto,assegurando assim a separação das responsabilidades.

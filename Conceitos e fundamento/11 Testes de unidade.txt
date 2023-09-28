@@ -1,0 +1,11 @@
+Testes de unidade?
+ 
+ Testes unidades são uma pratica utilizada por desenvolvedores utilizada para testar as menores unidades da aplicação(metodos,funções,classes com metodos,etc)
+Normalmente é criado um projeto separado para a criação desses testes,nunca no mesmo projeto.
+  Nessa pratica nos criamos um projeto separado com varios metodos decorados com DataAnnotations que são de ferramentas de teste especificas como o XUnity.
+assim então temos dentro dos metodos tres areas 
+// Arrange - Organização e preparação dos objetos para teste
+// Act - execução do teste
+// Asssert - faz a verificação e a afirmação se o resultado do teste condiz com o resultado esperado.
+
+ Esses testes são geralmente executados no fim do desenvolvimento ou em mudanças na regra de negocios que podem afetar os metodos que a atingem.

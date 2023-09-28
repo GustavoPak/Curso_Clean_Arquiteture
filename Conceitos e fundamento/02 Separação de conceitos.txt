@@ -1,0 +1,14 @@
+Separação de conceitos (SoC)
+
+esse é um principio que buscar dividir o sistema em camadas,com foco em dividir responsabilidades e facilitar a coomprensão,manutenção e resposabilidade
+de um sistema por camadas,onde cada camada é responsavel por sua propria tarefa,como a camada de apresentação de dados,a camada de logica de negocios e a
+camada de acesso a dados,é fundamental na arquitetura limpa,e implica que cada camada deve ter uma dependencia minima ou nula de outra camada assim facilitando
+a manutenção,compreensão e desenvolvimento do seu projeto,ela utiliza uma alta coesão e um acoplamento minino de responsabildades.
+
+Por que utilizar?
+
+Esse principio vai facilitar drasticamente o entendimento,pois voce tem uma separação mais clara das responsabilidades e organização por camadas,desenvolvimento
+pois você evita a repetição de dados e separa cada modulo ou componente para lidar com sua propria logica ao inves de repetir essa mesma logica em varios lugares e
+manutenção pois voce pode alterar uma area que é indenpendente ou com pouca dependencia,assim voce consegue identificar melhor onde esta a parte que deseja alterar
+e com o acoplamento baixo,vai saber melhor quais areas são dependentes dessa area que voce esta ajustando,e por fim testabilidade pois você não precisa rodar
+o projeto inteiro para testar uma unica area,simplesmente pode injetar dados ficticios nessa area e testa-la separadamente.

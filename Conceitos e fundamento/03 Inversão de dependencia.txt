@@ -1,0 +1,18 @@
+Inversão de dependencia?
+
+É um conceito que diz que classes de alto nivel não devem depender de classes de baixo nivel,mas sim ambas dependerem de uma abstração,para reduzir o
+alto aclopamento das classes.
+
+Classes de alto nivel? refere-se a classe que implementa a logica de negocios com uma logica de dados complexa,elas ficam na camada de negocios.
+
+Classes de baixo nivel? refere-se as classes da camada de infaestutura que é responsavel pelo acesso a fontes externas,como um banco de dados,uma requisição
+ http para terceiros,configurações da estrutura do projeto,ele é responsavel principalmente pela comunicação externa da sua aplicação.
+
+ Ou seja as classes de negocio não devem depender de classes concretas das classes concretas de acesso a dados,ao inves disso,criamos uma abstração,e assim tanto
+a implementação da classe de baixo nivel como a dependencia da classe de alto nivel devem ser dependentes dessa abstração,seja uma classe abstrata ou interface.
+
+ Esse principio diz isso porem não diz como faze-lo, para isso nos utilizamos o Sistema de injeção de dependencia.
+
+Sistema de injeção de Dependencia? É um padrão de projeto usado para implementar esse principio,ele é responsavel por instanciar as dependencias de classes
+ de alto nivel,com base nas abstrações de baixo nivel,assim ela controla tambem o tempo de vida dessas instancias,e aloca essas responsabilidades de instanciar
+em um só lugar.

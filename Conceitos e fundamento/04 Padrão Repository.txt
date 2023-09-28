@@ -1,0 +1,37 @@
+Padrão repository?
+
+ É um padrão normalmente utilizado em projetos de orientação a objeto que tem o objetivo de separar a camada de acesso a dados da camada da aplicação(camada de negocios)
+com ele é possivel desacoplar essas duas camadas assim evitando repetição de codigo,desacoplando as duas camadas,afinal a camada de negocios da app não é responsavel pela
+logica de acesso a dados e vice versa,e assim mantendo metodos concretos.
+
+ Repository - é uma abstração que define uma interface,que contem os metodos necessários para o gerenciamento de dados com GET,POST,PUT,DELETE e assim com os metodos definidos
+ela possuirá uma classe concreta que a implementa com uma logica clara e concreta de cada metodo, assim então jogaremos esse respositorio no Conteiner DI que fica responsavel por criar
+instancias desses repositorios quando necessário,e por fim criamos esse objeto na logica de negocios que formos utilizar e utilizamos a injeção de dependencia no construtor.
+ Pronto,sua logica de negocios tem metodos concretos e seguros para gerenciar os dados,sem precisar saber como eles funcionam.
+ Esse padrão é util para definir modularidade,separação de responsabilidades,evitar repetição de dados e facilitar testes,fora ser uma boa pratica de arquitetura.
+
+Repositorio generico ?
+ É um tipo de repositorio padrão que não define um modelo especifico,ao inves disso ele define o tipo <T> ou seja, esse tipo sera especificado para o modelo desejado na logica de negocios
+isso é recomendado quando geralmente os modelos tem a mesma logica de gerenciamento de dados,sem politicas extras.
+
+_Irepositorio<T>(); vira _Irepositorio<Produto>(); - isso claro so sera definido onde voce for utilizar 
+
+Definição de um genericos - Public Interface IRepository<T> : where <T> class
+
+classe concreta - Public class Resporitory<T> : IRepository<T> where <T> : class
+
+como injetamos esse repositorio na camada?
+
+public class ClienteController {
+
+  private readonly IRepository<Cliente> ClienteRep;
+
+  Public ClienteController(IRepsository<Cliente> clienteRep) 
+   {
+      ClienteRep = clienteRep                       
+   };
+};
+
+Repositorio especifico ?
+ É um tipo de respositorio que utiliza o seu modelo especifico com um IRepositorioCliente que é especifico para o modelo cliente,como eu disse esse tipo de Rep é util quando seus modelos tiver operações adicionais
+antes de ser adicionado no banco de dados.

@@ -1,0 +1,33 @@
+O que é o padrão CQRS?
+
+Esse é um padrão no qual se visa separar as consultas dos comandos,onde consultas referem-se a todos os metodos para leitura de dados e comando refere-se a alteração de dados
+no padrão CQRS(Command Query Responsability Segregation) ou em uma tradução minha,Separação de responsabilidade de consulta e comando,visa separar primeiramente
+
+Modelos de consultas de modelos de comandos
+Nessa area nos utilizamos para consulta DTOS mais simples que contem somente os dados necessarios para a consulta,assim não precisando utilizar os modelos de dominio prinicpais
+ evitando dados desnecessarios que comprometem a aplicação,alem de melhorar o desempenho
+
+Separação por camadas
+
+ No jeito padrão nos utilziamos varias camadas tanto para consulta quanto para alteração de dados,o que o CQRS define é um padrão diferente para a consulta onde 
+ INFRAESTRUCTURE - para acesso a dados 
+       \|/
+ DATA ACESS DTO - para nossos modelos adaptados para consultas simples
+       \|/
+ PRESENTATION LAYER - direto para a camada de apresentação ao usuario
+
+Ja os comando seguem o caminho padrão
+
+INFRAESTRUCTURE - para acesso a dados 
+       \|/
+ DOMAIN LAYER - para nossos modelos completos para realização de alterações.
+       \|/
+ APPLICATION LAYER - camada de negocios
+       \|/
+ PRESENTATION LAYER - camada de apresentação ao usuario
+
+
+assim melhorando o desempenho para consultas e aumentando a segurança separando o modelo de dados detalhado de um DTO que só ira conter
+ o que precisamos.
+
+ SITUAÇÃO NÃO RECOMENDADAS - Projetos simples em que um CRUD basico resolveria e que não meche com altas demandas de dados.

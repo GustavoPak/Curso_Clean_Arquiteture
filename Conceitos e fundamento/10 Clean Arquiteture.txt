@@ -1,0 +1,11 @@
+Clean Arquiteture
+
+ Clean Arquiteture ou arquitetura limpa foi um conceito criado pelo Uncle Bob que seria um conjunto de ideias e principios que a arquitetura que o implemente
+deve seguir,esse conceito não é novo,foi agrupado de boas praticas e padrões e principalmente da arquitetura hexagonal e cebola.
+ A ideia da CA é criar uma arquitetura limpa que seja facil de testar,mudar e entender para qualquer desenvolvedor,e que seja modular e flexivel.
+um desses principios é a divisão em camadas,na clean arquiteture é essencial que sua aplicação tenha uma separação de responsabilidades em camadas,e ela aplica
+o conceito de que camadas de alto nivel (negocios) não deve depender nem conhecer camadas de baixo nivel,ao inves disso ela deve ser indenpendente,se não
+ouvesse aplicação ela ainda estaria intacta pois nao pode depender de framework ou tecnologia,isso melhora a coompreensão e testabilidade da camada,e manutenção
+ Outro principio é o da inversão da dependencia,onde o codigo fonte deve apontar para o interior da aplicação,no caso do codigo do centro como UseCases precisar
+de metodos da camada de estrutura,ele não deve criar um objeto dessa camada,ao inves disso,ele criar um objeto de abstração,a mesma que vai fornecer o metodo para 
+a classe concreta que vai implementa-la,que fica na infraestrutura.

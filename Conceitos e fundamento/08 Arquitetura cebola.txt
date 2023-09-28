@@ -1,0 +1,4 @@
+Diferença da arquitetura em 3 camadas
+
+A arquitetura cebola difente dessa arquitetura visa aplicar a regra da dependencia,na arquitetura de 3 camadas vemos que a camada BLL esta muito dependente da camada
+ de acesso a dados

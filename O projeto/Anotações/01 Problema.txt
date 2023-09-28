@@ -1,0 +1,17 @@
+Qual é o problema em não usar essa arquitetura?
+
+ Muitos desenvolvedores no inicio da aprendizagem começam utilizando a arquitetura padrão,que o proprio framework oferece,com a famosa "Arquitetura monolitica"
+Essa arquitetura é recomendada para quem esta começando,afinal ela é simples e ainda define a separação das responsabilidades em camadas,mesmo que a nivel de
+pastas.
+ Porem em projetos grandes e reais,onde a complexidade do codigo é muito grande,é utilizado outras arquiteturas que são mais faceis de entender como a arquitetura
+em tres camadas,cebola e hexagonal
+
+ Por que isso?
+ A arquitetura monolitica pode parecer a mais obvia e facil de implementar,mas e se caso o projeto aumente seu tamanho? como seria para entender a organização do codigo em simples pastas?
+como um novo desenvolvedor desenrola isso? É porisso é melhor uma arquitetura em camadas,a nivel de projeto,assim fica mais facil separar as responsabilidades.
+ E o acoplamento? nesse tipo de projeto as classes ficam muito acopladas muitas as outras,isso é horrivel para testabilidade e manutenção do codigo,pois cada alteração em uma camada afeta
+as outras de modo muito direto,e pode quebrar toda a aplicação,na arquitetura limpa,fica tudo mais separado,afinal as camadas serão independentes ou pouco dependentes,ou seja,mais facil identificar qual parte é afetada.
+ E a dependencia de Framework? seu projeto monolitico vai usar um banco de dados especificos por exemplo,e se precisar mudar? toda a sua aplicação sofrerá com isso e pode quebrar por uma simples mudança de framework.
+Sua aplicação precisa ser independente de framework,isso é responsabilidade de outra camada,sua aplicação so precisa se preocupar com a logica do negocio,não com detalhes de sua implementação,deixe isso com a camada
+de infraestrutura.
+ Problemas de dependencia tambem é alto,uma classe não pode depender da outra diretamente,ambas precisam depender de uma abstração (Interface ou classe abstrata).

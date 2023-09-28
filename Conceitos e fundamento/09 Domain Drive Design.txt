@@ -1,0 +1,12 @@
+O que é DDD?
+
+ Domain Drive Design é um conjunto de principios que são seguidos por desenvolvedores que visá resolver o problema mais importante de um projeto,A regra de negocios.
+ela não é uma arquitetura ou um padrão mas sim uma reunião  de conceitos que ajudam a diminuir a complexidade da regra do negocio e melhorar a modelagem de dados.
+
+Ela aborda temas muito recorrentes com soluções para uma boa modelagem e um bom entendimento de codigo,como uma linguagem obligua padrões factory e repository,aggregates, dentre outros topicos importantes para modelagem
+.
+
+Para que é indicado?
+
+ Como o nome diz,não é necessário seguir muitos conceitos se seu maior problema na aplicação for a complexidade da tecnologia ou dos dados,mas é indicado se o problema
+maior do seu projeto for as regras de negocios,se elas forem muito complexas é necessario utilizar de alguns desses topicos,que,muitos ja são utilizados.

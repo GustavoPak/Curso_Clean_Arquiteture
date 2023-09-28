@@ -1,0 +1,8 @@
+O que são dados anemicos?
+
+São dados com falta de logica de negocio,apenas apresentações dos dados sem nenhuma restrição,validação ou logica.
+Ela não é adequada a clean arquiteture,nessa abordagem,nosso dados precisam ser ricos em informações e logica,porem essa parte não ficatá
+diretamente na classe do modelo de dados,mas sim na camada da logica de negocios para separar as responsabilidades,e facilitar a manutenção,
+a camada de modelo de dados não deve depender da classe de modelo de negocios para existir,deve ser idependente,portanto onde fica a logica
+da validação dos dados?
+Aparentemente na parte de logica de negocios,em "UseCases".
