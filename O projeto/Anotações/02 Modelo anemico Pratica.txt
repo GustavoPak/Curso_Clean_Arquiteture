@@ -1,0 +1,85 @@
+Foi criado um modelo de dados como de costume
+
+Esse modelo esta anemico desrespeeitando o DDD e o principio da Clean Arquiteture que é chamado de Domain Rich Model (Principio do modelo rico)
+
+Para resolver isso fizemos:
+
+- Adicionamos um "Sealed" depois de public que indica que a classe não pode ser herdada
+- Adicionamos construtores com parametros especificos e validações para não aceitar qualquer tipo de dado
+- Adicinamos Sets Privados para que não seja possivel alterar valores depois de declarados.
+- Adicionamos na nossa pasta Validations,uma classe generica simples chamada "DomainExceptionValidation" que herda de exception e criamos um metodo estatico "When" para validarmos parametros nos construtores
+
+coidgo: 
+ 
+ public class DomainExceptionValidation : Exception
+    {
+        public DomainExceptionValidation(string error) : base(error) { }
+
+        public static void When (bool hasError, string message)
+        {
+            if (hasError)
+            {
+                throw new DomainExceptionValidation(message);
+            }
+        }
+    }
+
+Em seguida criamos um metodo no nosso proprio modelo de dominio que usa esse metodo:
+
+ public void ValidateDomain(string name)
+        {
+            DomainExceptionValidation.When(string.IsNullOrEmpty(name),"This name is not Valid!");
+
+            DomainExceptionValidation.When(name.Length < 3, "Invalid name,too short,minimum 3 caracters");
+
+            Name = name;
+        }
+
+ Perceba que é especifico para os contrutores com a entrada "Nome" para o Id nos puxamos diretamente o metodo de validação
+
+ public Category(int id,string name)
+        {
+            DomainExceptionValidation.When(id < 0, "This Id is not valid.");
+            Id = id;
+            DomainExceptionValidate(name);
+        }
+
+ Parece que isso pode ser feito.
+--------------------------------------------------------------------------------------------------------------------------
+
+Logo apos na classe produto,criamos o mesmo metodo validate,porem para todas as propriedades,ela tambem vai usar nosso When de DomainExeption que criamos
+
+private void ValidateDomain(string name,string description,decimal price,int stock,string image)
+        {
+            DomainExceptionValidation.When(string.IsNullOrEmpty(name),
+                 "This name is not Valid!");
+
+            DomainExceptionValidation.When(name.Length < 3,
+                 "Invalid name,too short,minimum 3 characters");
+
+            DomainExceptionValidation.When(string.IsNullOrEmpty(description),
+                 "This Description is not Valid!");
+
+            DomainExceptionValidation.When(description.Length < 10,
+                 "Invalid Description,too short,minimum 10 characters");
+
+            DomainExceptionValidation.When(price < 0, "The price can't be 0,00.");
+
+            DomainExceptionValidation.When(stock < 0, "The stock can't be 0.");
+
+            DomainExceptionValidation.When(string.IsNullOrEmpty(image),
+                 "This field is required.");
+
+            DomainExceptionValidation.When(image.Length > 250,
+                 "Too long your Baka! >:(");
+
+            Name = name;
+            Description = description;
+            Price = price;
+            Stock = stock;
+            Image = image;
+        }
+
+ criamos uma classe basica que nos ajuda no Id.
+
+ 

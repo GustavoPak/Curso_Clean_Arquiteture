@@ -1,0 +1,11 @@
+Na nossa pasta de modelos,podemos criar uma classe base que possui todos os atributos dos meus dominios em comum
+
+ por exemplo: 
+ 
+ public abstract class Entity
+    {
+        public int Id { get; protected set; }
+    }
+
+ Apos isso,fazemos as classes de dominio herdarem de "Entity" e herdar seus atributos genericos como o Id que toda classe possui
+Pode parecer desnecessário mas é bem util em aplicações com varios atributos em comum como "DataCreation" ou 'DataUpdate"´por exemplo. 
