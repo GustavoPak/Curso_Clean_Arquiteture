@@ -1,0 +1,12 @@
+O que são essas migrações?
+
+É um recurso do Entity Framework que permite ter um versionamento do seu banco de dados se baseando nas sua classes,ele permite com que voce tenha varias versões
+ do banco de dados salvas de forma que mantenha a sincronia da sua aplicação com o banco de dados,e essass atualizações são incrementais.
+
+ Por que estou mencionando ele aqui?
+ Tivemos um problema ao implementar ela na camada infra.data,ja que ele pediu uma dependencia do entity framework.design na camada de UI,por algum motivo ele
+necessita que essa camada tenha acesso a esse framework. Dito isso,vamos implementar esse framework nessa camada? Nada disso,a camada de apresentação não tem nada haver com a camada de infraestrutura
+ Ao inves disso vamos deixar esse framework publico para toda a aplicação
+
+ Clique na camada infra.Data e desabilite a opção "PrivateAssets" do framework "design" assim ela não sera privada para apenas esse projeto,mas para toda aplicação,de forma que a camada de UI pode
+utiliza-la sem precisar depender desse Framework.

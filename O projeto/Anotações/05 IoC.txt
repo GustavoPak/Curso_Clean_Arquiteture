@@ -1,0 +1,40 @@
+No nosso projeto,ja criamos o db context e a implementação dos repositorys,porem perceba que na nossa implementação,usamos uma instancia de appdbcontext,e
+perceba que precisaremos de uma instancia desses repositorios futuramente para nossa logica da application.
+
+ Mas de onde essas instancias vem? ja que estamos injetando essas dependencias de construtores?
+
+ Vem do conteiner DI,é uma area que é responsavel por instanciar esses objetos e enviar para as classes que as requisitam de forma automatica,o .NET tem tecnologia
+para implementar esse conteiner,ele utilizar o "IServiceCollection" que lida com essas instancias como serviços
+
+ Mas esse conteiner fica no projeto de WEBUI por padrão,vamos utilizar essa area?
+
+ Não! não podemos acoplar a area de infraestrutura com a area de apresentação,fora que essa area precisaria de frameworks que não tem nada haver com essa area
+como o Entity Framework,então isso não é uma opção
+
+ Então como implementamos isso sem depender desses frameworks?
+ 
+ No nosso projeto possuimos a camada infra.IoC e não é a toa,la criaremos uma classe estatica com um metodo de estensão de IServiceCollection.
+ !!!Esse metodo precisa devolver o objeto services com todas as configurações feitas,e vai precisar do IConfiguration no parametro,pra termos acesso ao
+appSettings.json!!!
+
+ Nome classe recomendado "DependencyInjection" nome do metodo recomendado "AddInfraestructure".
+ Exemplo:
+
+ public static class DependencyInjection
+    {
+        public static IServiceCollection AddInfraEstructure(this IServiceCollection services,IConfiguration configuration)
+        {
+            services.AddDbContext<AppDbContext>(options => options
+              .UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                  x => x.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IproductRepository, ProductRepository>();
+
+            return services;
+        }
+    }
+
+ Pronto,agora o Iservice que é utilizado na webUI pode implementar nosso metodo sem precisar conhecer os detalhes e ter os frameworks necessarios.
+
+ builder.Services.AddInfraEstructure(builder.Configuration);

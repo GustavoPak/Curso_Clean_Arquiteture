@@ -1,0 +1,65 @@
+O que é a fluent API?
+
+É um recurso do entity framework que nos permite melhorar as regras dos atributos no banco de dados.
+
+Mas ja não fizemos isso nas proprias propriedades?
+
+ Sim porem o banco de dados não esta impondo nenhum limite aos seus atributos,por exemplo,qualquer string como Nome ou Descrição pode ocupar ate 2GB de espaço se não definirmos um limite de caracteres,ela sera ilimitada.
+Outro problema é que essas strings serão consideradas Nullable no banco de dados,no que em alguns atributos é essencial que sejam obrigatorias,outros como decimal ter uma precisão muito grande como um (18,2) perceba que não utilizamos isso tudo,
+a não ser que seja uma empresa multimilionaria.
+
+ Com isso como colocamos essas regras sem precisar mecher em banco de dados? Simples,utilizamos a fluent API.
+
+ A fluent API é responsavel por conversar com o banco de dados e configurar suas entidades na tabela,sem precisar saber nada sobre o banco,nela,impomos regras e restrições para evitar um banco de dados exagerado que não consuma tanto espaço e 
+que tenha regras de relação bem definidas.
+
+ Jeitos de configurar essas regras? 
+
+ Jeito 1 
+
+ No seu dbContext de um OVERRIDE e lançe o metodo "OnModelCreating" esse metodo contem um parametro "builder" que te dão acesso a todas as entidades e suas propriedades,a partir dai esta livre pra configurar por exemplo.
+
+ base.OnModelCreating(modelBuilder);
+ modelBuilder.Entity<Product>().Property(p => p.Name).IsRequired();
+
+ Porem esse jeito de fazer deixa o codigo muito embolado em um lugar certo porisso vamos a uma boa pratica do maccorati.
+ 
+ Jeito 2
+
+ invoque o OnModelCreating nas sua classe que herda de db context como visto acima,porem dessa vez com o seguinte conteudo.
+
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        }
+
+ Esse ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly será muito importante.
+
+ Crie a seguinte pasta no seu projeto de acesso a dados "EntitiesConfiguration" que como o nome diz,define as configurações da sua entidade.
+ Nessa pasta crie as classes de cada entidade,nome recomendado "CategoryConfiguration" , "ProductConfiguration".
+
+ usamos o exemplo da classe "CategoryConfiguration",torne a publica e faça herdar de IEntityTypeConfiguration<Category> a seguir implemente a interface.
+
+ virá um metodo Configure ja especifico para sua entidade "Categoria" com o parametro builder pronto pra receber instruções
+  
+ Exemplo: 
+ 
+ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
+    {
+        public void Configure(EntityTypeBuilder<Category> builder)
+        {
+            builder.HasKey(p => p.Id);
+            builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
+
+            builder.HasData(
+                new Category(1, "Material Escolar"),
+                new Category(2, "Eletrônicos"),
+                new Category(3, "Acessórios"));
+        }
+    }
+
+ Fiz isso para todas as minhas entidades,como o entity vai ver essas configurações? lembra do ApplyConfigurationFromAssembly direcionando para seu AppContext? então,voce esta praticamente pedindo para ele ir no app dbcontext,fuçar todas as suas
+entidades,ver onde elas estão sendo chamadas(na sua classe de configuração) e a partir dai ela vai ler todas as suas configurações mesmo que em outra classe.
+
+ 
