@@ -43,7 +43,7 @@ namespace CleanArchMvc.Infra.Data.Repositories
             return await _dbContext.Categories.ToListAsync();
         }
 
-        public async Task<Category> GetByIdAsync(int id)
+        public async Task<Category> GetByIdAsync(int? id)
         {
             return await _dbContext.Categories.FindAsync(id);
         }

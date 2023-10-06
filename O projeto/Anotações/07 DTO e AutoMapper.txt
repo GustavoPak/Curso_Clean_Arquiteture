@@ -1,0 +1,82 @@
+DTOs?
+
+ DTOs (Data Transfer Objects) são objetos criados para representar dados do modelo de dominio de forma mais eficaz e segura para seu projeto.
+
+ Por que utiliza-los?
+
+ Quando usamos nossos modelos de dominio padrão para apresentar dados a area de WebUI,Muitas das informações desses modelos são desnecessárias ou sigilosas,então
+criamos esses objetos com apenas os atributos que precisamos mostrar na camada de apresentação,fora que podemos nisso,utilizar os data annotations nos DTOs de forma
+que não iremos poluir nosso modelo de dominio deixando ele limpo e seguro,as DTOs são parecidas com ViewModels mas View models são mais focadas em unir classes
+para uma unica view enquanto o DTO tem a intenção de abstrair dados desnecessários para nossa view.
+ Fora que podemos adicionar atributos tanto na camada de dominio sem afetar os DTOs quanto nos proprios DTOs com atributos que não são necessarios persistir na 
+camada de dominio.
+
+AutoMapper?
+
+ Esse é um pacote muito utilizado para fazer o mapeamento de objetos de forma automatica,pense no trabalho de ter que ficar igualando atributo da classe A ate
+a classe B em todas as actions,fora a imensa repetição de codigo,porisso foi criado o Auto mapper que faz isso de forma automatica,sendo apenas necessário configurar
+o arquivo uma vez e pronto,pode utilizar todo o mapeamento por ele de forma automatica apenas chamando metodos.
+Lembrando que ele faz a operação Reverse que pode passar tanto objetos da classe A para classe B quanto da classe B para a classe A.
+
+Implementação
+
+ PRIMEIRO INSTALE O AUTOMAPPER.
+ 
+ Primeiro na nossa camada relacionada a serviços do aplicação,Vamos criar a pasta DTOs e Mappings.
+
+ Dentro da pastas DTOs criamos os sufixo sendo como "CategoryDTO" ou "Product DTO" Após isso podemos criar os atributos necessarios para o que a gente vai utilizar,alem do que aqui podemos usar
+ Data Annotations a vontade.
+ 
+ Exemplo:
+
+ public class CategoryDTO
+    {
+        public int Id { get; set; }
+        [Required(ErrorMessage = "This name is Required")]
+        [MinLength(5)]
+        [MaxLength(100)]
+        public string Name { get; set; }
+
+    }
+
+ Agora na pasta Mappings,podemos fazer a configuração desse mapeamento de forma simples. criamos a classe que vai herdar de profile,o tipo do AutoMapper para configurar. (Nome de classe recomendado "DomainToDTOMappingProfiler")
+
+ exemplo: 
+  
+   public class DomainToDTOMappingProfiler : Profile
+    {
+        public DomainToDTOMappingProfiler()
+        {
+            CreateMap<Category, CategoryDTO>().ReverseMap();
+            CreateMap<Product, ProductDTO>().ReverseMap();
+        }
+    }
+
+   NÃO É UM METODO,ESSA CONFIGURAÇÃO É FEITA NO PROPRIO CONSTRUTOR DA SUA CLASSE PERSONALIZADA,metodo reverse utilizado para fazer o mapeamento reverso.
+
+ Declarando o serviço no conteiner DI:
+
+ Agora como utilizamos o metodo de injeção de dependencia no container DI do nosso projeto,precisamos adicionar o serviço do auto mapper,direcionando para o arquivo
+de mapeamento.
+ 
+ Para isso vamos utilizar o pacote AutoMapper.Extensions.Microsoft.DependencyInjection.
+
+ Vamos adicionar ele na camada INFRA.IOC ou a camada que contem o conteiner DI.
+
+ apos isso adicionamos no Service : Services.AddAutoMapper(typeOf(DomainToDTOMapping)); ou seja apontando para nosso arquivo que fez a confg do mapeamento.
+
+ Usando na pratica:
+
+ No nosso serviço que precisamos converter os objetos,vamos utilizar uma instancia de IMapper nesse serviço,é por ela que vamos fazer o mapeamento.
+
+ Quando precisar converter objetoDTO para objetoEntity,use _mapper.Map<objetoEntity>(objetoDTO)
+ 
+ Ao contrario seria _mapper.Map<objetoDTO>(objetoEntity)
+
+ Resumindo CLASSEALVO classeAlvo = Map<OBJETOALVO>(OBJETOBASE);
+
+ Percebe que no serviço há uma padrão,para obter dados para camada de apresentação,devolveremos sempre DTOs,para persistir no banco de dados,devolveremos sempre Entitys.
+
+ 
+
+ 

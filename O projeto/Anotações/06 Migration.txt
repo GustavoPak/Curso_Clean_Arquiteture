@@ -8,5 +8,5 @@ O que são essas migrações?
 necessita que essa camada tenha acesso a esse framework. Dito isso,vamos implementar esse framework nessa camada? Nada disso,a camada de apresentação não tem nada haver com a camada de infraestrutura
  Ao inves disso vamos deixar esse framework publico para toda a aplicação
 
- Clique na camada infra.Data e desabilite a opção "PrivateAssets" do framework "design" assim ela não sera privada para apenas esse projeto,mas para toda aplicação,de forma que a camada de UI pode
+ Clique na camada infra.Data e deixe a opção "PrivateAssets" do framework "design" como "none" assim ela não sera publica para apenas esse projeto,mas para toda aplicação,de forma que a camada de UI pode
 utiliza-la sem precisar depender desse Framework.

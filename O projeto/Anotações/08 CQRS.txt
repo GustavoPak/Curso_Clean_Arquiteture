@@ -1,0 +1,81 @@
+CQRS - O que é?
+
+ CQRS é um padrão de arquitetura que visa separar comandos de consultas,assim otimizando cada comando e cada consulta com seu modelo especifico,aonde não precisamos usar um modelo
+generico para todas essas operações,isso aumenta o desempenho da aplicação e escabilidade,ja que cada modelo foi feito especificamente para sua função,ou sejam,tera um melhor desepenho nela.
+ E flexivel e escalavel por que cada modelo tera seu objetivo especifico,por exemplo,um modelo de consulta não tera que se preocupar com atributos e regras de negocios do modelo de escrita
+aumentando bastante seu desempenho.
+
+Onde é recomendado utilizar?
+
+ Esse padrão é altamente recomendado caso tenha uma entidade que tenha um grande volume de chamadas e isso esteja afetando o desempenho,nunca em projetos simples
+onde um CRUD possa resolver.
+
+ Como implementar?
+
+ Vamos utilizar o jeito mais simples,utilizando o Framework MediatR,ele faz a mediação entre o modelo de requisição e o modelo Handler,vamos chamar assim,ou seja sempre que o cliente faz uma
+requisição vamos: pegar o modelo da requisição e jogar seus atributos no nosso "ModeloDeRequisição" que vai ser usado no handler para as operações.
+
+ Vamos a um exemplo simples,"Ain o modelo produtos ta sendo bastante atualizado e isso afeta os desempenho!" vamos resolver então.
+
+Na nossa camada Application,vamos instalar o MediatR.
+ Na mesma camada vamos implementar CQRS/Produtos/Comands/ e criar uma classe "ProdutoAtualizarCommand" que vai conter APENAS ATRIBUTOS NECESSÁRIOS PARA O OBJETIVO "ATUALIZAR"
+Essa classe como vai representar uma requisição vamos fazela herdar de : IRequest ou : IRequest<Product> caso precise devolver o produto atualizado.
+
+E os handlers? como ficam nessa historia? vamos fazer uma classe exclusiva para ele CQRS/Produtos/Handlers/ProdutoAtualizarCommandHandler.cs 
+Esse handler vai conter o seu processamento de dados,ou seja,nada desse processamento no Services.
+
+Esse handler vai herdar de IRequestHandler<ClasseRepresentaRequisição,OQueDevolver> Assim que ele vai automaticamente direcionar sua classe de req para determinado handler.
+No nosso exemplo seria 
+
+ ProdutoAtualizarCommandHandler : IRequestHandler<ProdutoAtualizarCommand,Produto> {
+          
+            Instancias necessarias...
+ 
+           Public async Task<Produto> Handle(ProdutoAtualizarCommand request, CancellationToken cancellationToken) {
+                     
+                          Verificações...
+                     _Repository.AtualizarNomeProduto(request.Nome);
+           }
+Perceba que no caso de atualizar o nome o nosso Request so precisa ter o atributo "Nome" ao inves de todos os atributos desnecessarios? ele foi feito pra apenas esse proposito.Isso melhora muito o desempenho
+
+E na pratica,como utilizamos isso? No Services.
+
+ Public class ProdutoService {
+  
+   private readonly _mediatR;
+
+  public produtoService (IMediator mediator) {
+    _mediatR = mediator
+}
+
+ public async Task AtualizarProduto(ProdutoDTO) {
+     var AtualizarCommand = new ProdutoAtualizarCommand(Nome = ProdutoDTO.Nome)
+   _mediatR.Send(AtualizarCommand)
+}
+
+ pronto Tudo feito,so precisamos de uma instancia do nosso modelo de comando,Mas e se fossem varios atributos,vamos usar o AutoMapper.
+
+ public async Task AtualizarProduto(ProdutoDTO) {
+     var AtualizarCommand = _mapper.Map<ProdutoAtualizarCommand>(ProdutoDTO) - ou seja,converta o produtoDTO para ProdutoAtualizarCommand
+   _mediatR.Send(AtualizarCommand)
+}
+
+ Claro que teriamos que configurar o auto mapper com 
+
+ CreateMap<ProductDTO, ProductUpdateCommand>().ReverseMap();
+
+ ok mas como Recebemos a instancia do mediatR? No conteiner DI adicione o Framework do mediatR Tambem,nunca o dependencyInjection.
+
+   var myHandlers = AppDomain.CurrentDomain.Load("CleanArchMvc.Application"); - direcionando para onde estão seus Handlers
+
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(myHandlers));
+
+ Agora o mediatR sabe pra qual handler mandar sua requisição baseado no tipo que voce mandou no metodo Send,porisso sempre é preciso ter uma instancia de cada comando.
+  E por hoje é isso,pode testar.
+
+
+
+
+
+ 
+ 
