@@ -47,19 +47,19 @@ namespace CleanArchMvc.Application.Services
             return _mapper.Map<ProductDTO>(product);
         }
 
-        //public async Task<ProductDTO> GetProductCategory(int ? id)
-        //{
-        //    var GetByIdQuery = new GetProductByIdQuery(id.Value);
+        public async Task<ProductDTO> GetProductCategory(int? id)
+        {
+            var GetByIdQuery = new GetProductByIdQuery(id.Value);
 
-        //    if (GetByIdQuery == null)
-        //    {
-        //        throw new Exception("Non fue possible cambiar esta Id.");
-        //    }
+            if (GetByIdQuery == null)
+            {
+                throw new Exception("Is not possible to change this enntity.");  
+            }
 
-        //    var product = await _mediaTR.Send(GetByIdQuery);
+            var product = await _mediaTR.Send(GetByIdQuery);
 
-        //    return _mapper.Map<ProductDTO>(product);
-        //}
+            return _mapper.Map<ProductDTO>(product);
+        }
 
         public async Task<IEnumerable<ProductDTO>> GetProducts()
         {

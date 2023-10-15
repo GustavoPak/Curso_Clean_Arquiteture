@@ -1,0 +1,30 @@
+Como pegar uma string com o nome do arquivo de uma imagem e lançar na view?
+
+ Simplesna action responsavel por renderizar a imagem vamos adicionar o caminho dessa imagem na ViewBag e na view damos um:
+
+@if (!ViewBag.ImageExist)
+            {
+                <img src="~/images/noimage.jpg" class="rounded-circle"
+                     height="300" width="300" asp-append-version="true" />
+            }
+            else
+            {
+                <img src="~/images/@Model.Image" class="rounded-circle"
+                     height="300" width="300" asp-append-version="true" />
+            }
+
+Como percebeu,esse Viewbag.ImageExist é um booleano,onde,se der falso "!" Retorne a noimage (imagem padrão) senão retorne @model.image ou produto.image com
+a string do nome do arquivo que deve estar na pasta wwwwroot/images,tanto ela como uma no image precisa estar nessa pasta.
+
+mas como vamos colocar esse valor baseado em uma procura por nome? 
+
+ primeiro precisa de uma instancia de IWebHostEnviroment para pegar o caminho para o local das pastas estaticas.
+
+            var product = await _productService.GetById(id); (obtendo o produto para pegar o nome do arquivo de imagem.)
+
+            var WebRootPatch = _webHost.WebRootPath; (caminho do wwwroot)
+
+            var ImagePatch = Path.Combine(WebRootPatch, "images//", product.Image); combinação de tres strings que formam uma string como o caminho da imagem.
+            var Image = System.IO.File.Exists(ImagePatch);(teste do system.IO para verificar se a imagem com esse nome e caminho existem mesmo,retorna um bool.)
+
+            ViewBag.ImageExist = Image; ( um booleano pronto pra ser usado como teste na view para ver se a imagem existe ou não. )

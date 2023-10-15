@@ -1,0 +1,93 @@
+ O que é o identity?
+
+ É uma tecnologia muito importante na aplicação caso ela precise lidar com cada usuario separadamente,onde cada usuario tera suas informações e ações no site
+ele implementa um sistema de login e autorização onde o usuario manda suas credenciais,o servidor verifica a compatibilidade com credenciais no banco de dados e se forem
+veridicas é criado uma sessão contendo as informações desse usuário,por exemplo,esse usuário pode ter seus cursos,seus produtos comprados,seus textos.
+
+ A Autorização é responsavel por declarar a diferença entre usuarios,onde separa usuarios por grupos de usuarios normais e usuarios com mais poder na aplicação
+como um administrador do site por exemplo,ou grupos de usuarios onde cada grupo pode mexer em uma area diferente,ela é fundamental se voce quiser controlar
+aonde cada tipo de usuario pode mecher.
+
+ Implementação!!!
+
+ Primeiro vamos adicionar os as ferramentas do identity na nossa area Infra. Os pacotes (Microsoft.aspnetcore.identity) e (identity.entityFramework)
+
+ Depois configuramos o nosso AppDbContext personalizado que herda de DbContext,agora ele irá herdar de IdentityDbContext<IdentityUser>
+
+ Caso queria adicionar informações adicionais ao usuario agora ou futuramente crie uma classe personalizada que herde de : IdentityUser (publica)
+
+ Agora basta dar um Add-migration que o identity ficará responsavel por criar as tabelas.
+
+ PARTE 2 
+
+ Vamos criar as interfaces na camada domain e suas implementações na camada infra.data,com os metodos assincronos Login,Register e Logout. (Nome exemplo = IAuthenticate)
+ Precisamos separar então na pasta domain criei a pasta Account e coloquei as interfaces IAuthenticate e ISeedUserRoleInitial.
+ 
+ Na nossa area infra.data criei a implementação dessas interfaces na pasta Identity mesmo]
+ Nosso Authenticate precisara dos objetos do tipo SigninManager (para fazer login e logout) e UserManager para gerenciar o usuario como criar,alterar,remover,etc
+
+ Codigo: 
+
+ public class Authenticate : IAuthenticate
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+
+        public Authenticate(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
+
+        public async Task<bool> Login(string email, string password)
+        {
+            //verifica as credenciais do usuario e realiza o login (parametro IsPersistent significa se ele vai persistir mesmo se o cliente 
+            // fechar o navegador
+            var result = await _signInManager.PasswordSignInAsync(email, password, false, false); 
+            
+            //Retorna um booleano indicando se foi feito o login com sucesso ou nao
+            return result.Succeeded; 
+        }
+
+        public async Task<bool> Register(string email, string password)
+        {
+            //Precisamos de um tipo IdentityUser ou do nosso tipo personalizado que herda de IdentityUser para fazer o registro.
+
+            var newUser = new ApplicationUser
+            {
+                UserName = email,
+                Email = email
+            };
+                     //é criado o usuario com a senha e retorna um identityResult indicando se foi bem sucedido ou não
+            var result = await _userManager.CreateAsync(newUser, password);
+
+             //Faz o login se o resultado for true
+
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(newUser, false);
+            }
+             //Retorna uma resposta true ou false para quem chamou o metodo
+            return result.Succeeded;
+        }
+
+        public async Task Logout()
+        {
+            //faz o logout
+            await _signInManager.SignOutAsync();
+        }
+    }
+ 
+      Na camada infra.IOC 
+
+      services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            options.AccessDeniedPath = "Account/Login");
+
+            services.AddScoped<IAuthenticate, Authenticate>();
+            services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
+ 

@@ -13,6 +13,50 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\anime.jpeg",
+      "PackagePath": "staticwebassets\\images\\anime.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\anime.jpg",
+      "PackagePath": "staticwebassets\\images\\anime.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\borracha1.jpg",
+      "PackagePath": "staticwebassets\\images\\borracha1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\caderno1.jpg",
+      "PackagePath": "staticwebassets\\images\\caderno1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\calculadora1.jpg",
+      "PackagePath": "staticwebassets\\images\\calculadora1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\cartilha1.jpg",
+      "PackagePath": "staticwebassets\\images\\cartilha1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\catalog.png",
+      "PackagePath": "staticwebassets\\images\\catalog.png"
+    },
+    {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\catalogo1.png",
+      "PackagePath": "staticwebassets\\images\\catalogo1.png"
+    },
+    {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\estojo1.jpg",
+      "PackagePath": "staticwebassets\\images\\estojo1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\noimage.jpg",
+      "PackagePath": "staticwebassets\\images\\noimage.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\images\\noimage.png",
+      "PackagePath": "staticwebassets\\images\\noimage.png"
+    },
+    {
       "Id": "C:\\Users\\Gustavo\\Desktop\\Clean Arquitheture\\O projeto\\CleanArchMvc\\CleanArchMvc.WebUI\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -21,6 +21,7 @@ namespace CleanArchMvc.Domain.Entities
         public Product(string name, string description, decimal price, int stock, string image, int categoryId)
         {
             ValidateDomain(name, description,price,stock,image);
+            CategoryId = categoryId;
         }
         public Product(int id,string name, string description, decimal price, int stock, string image)
         {
