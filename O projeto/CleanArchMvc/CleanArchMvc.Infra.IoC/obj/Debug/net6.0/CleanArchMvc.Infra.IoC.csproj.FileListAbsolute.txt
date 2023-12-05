@@ -1,4 +1,5 @@
 C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\bin\Debug\net6.0\CleanArchMvc.Infra.IoC.deps.json
+C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\bin\Debug\net6.0\CleanArchMvc.Infra.IoC.runtimeconfig.json
 C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\bin\Debug\net6.0\CleanArchMvc.Infra.IoC.dll
 C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\bin\Debug\net6.0\CleanArchMvc.Infra.IoC.pdb
 C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\bin\Debug\net6.0\CleanArchMvc.Application.dll
@@ -16,6 +17,5 @@ C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.
 C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\obj\Debug\net6.0\CleanArchMvc.Infra.IoC.dll
 C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\obj\Debug\net6.0\refint\CleanArchMvc.Infra.IoC.dll
 C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\obj\Debug\net6.0\CleanArchMvc.Infra.IoC.pdb
-C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\obj\Debug\net6.0\ref\CleanArchMvc.Infra.IoC.dll
-C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\bin\Debug\net6.0\CleanArchMvc.Infra.IoC.runtimeconfig.json
 C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\obj\Debug\net6.0\CleanArchMvc.Infra.IoC.genruntimeconfig.cache
+C:\Users\Gustavo\Desktop\Clean Arquitheture\O projeto\CleanArchMvc\CleanArchMvc.Infra.IoC\obj\Debug\net6.0\ref\CleanArchMvc.Infra.IoC.dll
